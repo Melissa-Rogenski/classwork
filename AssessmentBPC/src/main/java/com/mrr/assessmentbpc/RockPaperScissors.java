@@ -293,7 +293,7 @@ public class RockPaperScissors
                 
             }    
             
-            System.out.println("\n---------------FINAL-SCORE---------------")
+            System.out.println("\n---------------FINAL-SCORE---------------");
             //calling the displayScore function with the completed tallies of ties userWins and computerWins
             displayScore(ties, userWins, computerWins);
                 
