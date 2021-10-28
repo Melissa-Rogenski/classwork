@@ -48,11 +48,11 @@ public class DogGenetics
         do
         {
             // will generate random numbers in range of 1-100 inclusively
-            p1 = (dogBreed.nextInt(100 - 1) + 1);
-            p2 = (dogBreed.nextInt(100 - 1) + 1);
-            p3 = (dogBreed.nextInt(100 - 1) + 1);
-            p4 = (dogBreed.nextInt(100 - 1) + 1);
-            p5 = (dogBreed.nextInt(100 - 1) + 1);
+            p1 = (dogBreed.nextInt(100) + 1);
+            p2 = (dogBreed.nextInt(100) + 1);
+            p3 = (dogBreed.nextInt(100) + 1);
+            p4 = (dogBreed.nextInt(100) + 1);
+            p5 = (dogBreed.nextInt(100) + 1);
             sum = p1 + p2 + p3 + p4 + p5;
         }
         while(sum != 100);
