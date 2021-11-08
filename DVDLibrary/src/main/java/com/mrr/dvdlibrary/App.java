@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: mroge
+ * Purpose: file that contains the main function
  */
 package com.mrr.dvdlibrary;
 
@@ -12,17 +11,18 @@ import com.mrr.dvdlibrary.ui.DVDLibraryView;
 import com.mrr.dvdlibrary.ui.UserIO;
 import com.mrr.dvdlibrary.ui.UserIOConsoleImpl;
 
-/**
- *
- * @author mroge
- */
 public class App {
 
     public static void main(String[] args) {
+        // creating a UserIO variable that calls the UserIOConsole constructor
         UserIO myIo = new UserIOConsoleImpl();
+        // creating a DVDLibraryView variable that calls the DVDLibraryView constructor
         DVDLibraryView myView = new DVDLibraryView(myIo);
+        // creating a DVDLibraryDao variable that calls the DVDLibraryDaoFileImpl
         DVDLibraryDao myDao = new DVDLibraryDaoFileImpl();
+        // creating a DVDLibraryController variable that calls the DVDLibraryController constructor
         DVDLibraryController controller = new DVDLibraryController(myDao, myView);
+        // calling the run function of controller
         controller.run();
     }   
 }

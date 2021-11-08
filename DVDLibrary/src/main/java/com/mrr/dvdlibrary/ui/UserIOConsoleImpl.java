@@ -8,9 +8,11 @@ package com.mrr.dvdlibrary.ui;
  * TSG Official Implementation of the UserIO interface
  * May your view be ever in your favor!
  * @author ahill
+ * 
+ * mrr comment the console-specific implementation of the UserIO interface
  */
 import java.util.Scanner;
-
+//keyword implements shows that this class implements a interface
 public class UserIOConsoleImpl implements UserIO {
 
     final private Scanner console = new Scanner(System.in);

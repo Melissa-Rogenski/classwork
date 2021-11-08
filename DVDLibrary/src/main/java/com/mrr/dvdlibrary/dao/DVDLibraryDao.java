@@ -1,17 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: mroge
+ * Purpose: interface to be implemented by the DVDLibraryDaoFileImpl class file
+ * This interface defines the methods that must be implemented by any class that
+ * wants to play the role of DAO in the application.
+ *         
+ * The DVDLibraryController only uses this interface to reference the DAO — it 
+ * is completely unaware of the implementation details.
  */
 package com.mrr.dvdlibrary.dao;
 
 import com.mrr.dvdlibrary.dto.DVD;
 import java.util.List;
 
-/**
- *
- * @author mroge
- */
+// interface declaration
 public interface DVDLibraryDao {
     /**
      * Adds the given DVD to the library and associates it with the given
