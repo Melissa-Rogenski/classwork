@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mrr.vendingmachine.dao;
 
-/**
- *
- * @author mroge
- */
+import com.mrr.vendingmachine.dto.Product;
+import com.mrr.vendingmachine.service.VendingMachineDataValidationException;
+import java.util.List;
+
+
 public interface VendingMachineDao {
+    //Product addProduct(String name, Product product) throws VendingMachineDataValidationException;
+    
+    List<Product> getAllProducts() throws VendingMachineDataValidationException;
+    
+    Product getProduct(String name) throws VendingMachineDataValidationException;
     
 }
