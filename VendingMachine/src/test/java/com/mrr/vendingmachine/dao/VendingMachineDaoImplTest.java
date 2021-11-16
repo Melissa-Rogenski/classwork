@@ -1,11 +1,13 @@
-
+/*
+ * Author: mroge
+ * Purpose: this file is a test file to test all of the functionality in VendingMachineDaoImpl
+ */
 package com.mrr.vendingmachine.dao;
 
 import com.mrr.vendingmachine.dto.Product;
 import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -58,7 +60,7 @@ public class VendingMachineDaoImplTest {
         //Result
         Map<String, Product> result = testDao.loadProductsFromFile();
         //ExpectedResults
-        Map<String, Product> expResult = new HashMap<>();
+        Map<String, Product> expResult = new TreeMap<>();
         expResult.put("1", p1);
         expResult.put("2", p2);
         

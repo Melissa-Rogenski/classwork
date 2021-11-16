@@ -7,7 +7,6 @@ package com.mrr.vendingmachine.ui;
 import com.mrr.vendingmachine.dto.Change;
 import com.mrr.vendingmachine.dto.Product;
 import java.math.BigDecimal;
-import java.util.List;
 
 // defining what a VendingMachineView is
 public class VendingMachineView {
@@ -31,48 +30,55 @@ public class VendingMachineView {
         io.print(errorMsg);
     }
 
+    // public function that displays a final message to the console
     public void displayFinalMessage() {
-        io.print("Thank you for using the Vending Machine!");
+        io.print("THANK YOU FOR USING THE VENDING MACHINE!");
     }
 
+    // public function that returns true
     public boolean toExit() {
-        //placeholder
         return true;
     }
 
+    // public function that displays the change due to the user
     public void displayChangeDue(Change change) {
-        io.print("Change Due:");
-        io.print("Quarters: " + change.getQuarters());
-        io.print("Dimes: " + change.getDimes());
-        io.print("Nickels: " + change.getNickels());
-        io.print("Pennies: " + change.getPennies());
+        io.print("====================================");
+        io.print("           Change Due");
+        io.print("====================================");
+        io.print("Quarters | Dimes | Nickels | Pennies");
+        String temp = String.format("   %-10d%-9d%-10d%d", change.getQuarters(), change.getDimes(), change.getNickels(), change.getPennies());
+        io.print(temp);
     }
 
+    // public function that displays money input to console
     public void displayUserMoneyInput(BigDecimal amount) {
-        io.print("User input: " + amount);
-        //io.print("DisplayUserMoneyInput");
+        io.print("You have deposited $" + amount + ".");
     }
 
+    // public function that displays product choice to console
     public void displayUserChoiceOfProduct(Product product) {
-        io.print("Product Choice is: ");
-        displayProduct(product);
+        io.print("You have chosen " + product.getProductName() + ".");
     }
 
+    // public function that prompts the user for their product choice and then returns the choice
     public String promptUserProductChoice() {
-        return io.readString("Please enter selection.");    
+        return io.readString("Please choose the product you want to buy (Enter a No)");    
     }
 
+    // public function that prompts the user for their money input and then returns the money input
     public BigDecimal promptUserMoneyInput() {
         String str = io.readString("Please put in money:");
         BigDecimal bd = new BigDecimal(str);
         return bd;
     }
 
+    // public function that diaplays the product header to the console
     public void displayProductHeader() {
         io.print("No     Product          Price");
         io.print("-----------------------------");
     }
 
+    // public function that displaysd the welcome message to the console
     public void displayVendingMachineWelcome() {
         io.print(" *********************************************");
         io.print("     WELCOME TO THE VENDING MACHINE           ");
@@ -80,6 +86,7 @@ public class VendingMachineView {
         io.print("                                              ");
     }
 
+    // public function that displays the given product
     public void displayProduct(Product p) {
         String productInfo = String.format("%-7s%-17s%s",
                     p.getProductId(),
