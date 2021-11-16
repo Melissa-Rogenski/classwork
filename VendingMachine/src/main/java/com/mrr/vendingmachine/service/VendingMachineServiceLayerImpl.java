@@ -50,29 +50,30 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public void checkSufficientMoneyToBuyProduct(BigDecimal inputAmount, Product product) throws VendingMachineInsufficientFundsException {
         if(inputAmount.compareTo(product.getPrice()) < 0) {
-            throw new VendingMachineInsufficientFundsException("Insufficient funds to buy " + product.getProductName() + " prices at $" + product.getPrice());
+            throw new VendingMachineInsufficientFundsException("Insufficient funds to buy " + product.getProductName() + " priced at $" + product.getPrice());
         }
     }
-    
-    //@Override
-    public Change claculateChange(BigDecimal amount, Product product) {
-        BigDecimal change = amount.subtract(product.getPrice()).multiply(new BigDecimal("100"));
-        return new Change(change);
-    }
 
-    private void validateProductInStock(String productId) {
-        System.out.print("ValidateProduct in stock");
-    }
-
-    @Override
-    public Change calculateChange(BigDecimal amount, Product product) {
-        Change change = new Change(amount);
-        return change;
+    private void validateProductInStock(String productId) throws VendingMachineNoItemInventoryException {
+        Product product = dao.getProduct(productId);
+        if(product.getItemsInStock() <= 0) {
+            throw new VendingMachineNoItemInventoryException("Sorry, " + product.getProductName() + " is out of stock.");
+        }
     }
 
     @Override
     public void updateProductSale(Product product) throws VendingMachineNoItemInventoryException, VendingMachinePersistenceException {
-        System.out.print("update product sale implementation not avaliable");
+        int stock = product.getItemsInStock();
+        stock--;
+        product.setItemsInStock(stock);
+        dao.updateProduct(product.getProductId(), product);
+        auditDao.writeAuditEntry("Product at Id: " + product.getProductId() + " stock is now at " + product.getItemsInStock());
+    }
+
+    @Override
+    public Change calculateChange(BigDecimal amount, Product product) {
+        BigDecimal change = amount.subtract(product.getPrice()).multiply(new BigDecimal("100"));
+        return new Change(change);
     }
     
 }

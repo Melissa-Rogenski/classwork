@@ -20,50 +20,6 @@ public class VendingMachineView {
         this.io = io;
     }
     
-    // public function to print the menu and return the selection in int format
-    //public int printMenuAndGetSelection() {
-     //   io.print("Main Menu");
-     //   io.print("1. Enter Coins");
-     //   io.print("2. Exit");
-
-        // getting user input
-     //   return io.readInt("Please select from the above choices.", 1, 2);
-   // }
-    
-    // public function that prints a banner to the console
-    public void displayProductsBanner() {
-        io.print(" *********************************************");
-        io.print("     WELCOME TO THE VENDING MACHINE           ");
-        io.print(" *********************************************");
-        io.print("            Products available:               ");
-        io.print("                                              ");
-    }
-    
-    // public function that prints a banner to the console
-    //public void displayPurchaseSuccessBanner() {
-    //    io.print("Purchase Successful.");
-    //}
-    
-    // public function that displays all of the products in the machine, takes parameter List of products
-    public void displayProductList(List<Product> productList) {
-        // for each loop to loop through all products
-        for (Product currentProduct : productList) {
-            // formatting information into a string
-            String productInfo = String.format("%s. Name: %-10s Cost: %-4s Avaliable: %s",
-                    currentProduct.getProductId(),
-                    currentProduct.getProductName(),
-                    currentProduct.getPrice(),
-                    currentProduct.getItemsInStock());
-            // passing string to function to print out the info
-            io.print(productInfo);
-        }
-    }
-    
-    // public function that prints a banner to the console
-    public void displayExitBanner() {
-        io.print("Good Bye!!!");
-    }
-    
     // public function that prints a banner to the console
     public void displayUnknownCommandBanner() {
         io.print("Unknown Command!!!");
@@ -76,7 +32,7 @@ public class VendingMachineView {
     }
 
     public void displayFinalMessage() {
-        io.print("DisplayFinalMessage");
+        io.print("Thank you for using the Vending Machine!");
     }
 
     public boolean toExit() {
@@ -85,15 +41,21 @@ public class VendingMachineView {
     }
 
     public void displayChangeDue(Change change) {
-        io.print("DisplayChangeDue");
+        io.print("Change Due:");
+        io.print("Quarters: " + change.getQuarters());
+        io.print("Dimes: " + change.getDimes());
+        io.print("Nickels: " + change.getNickels());
+        io.print("Pennies: " + change.getPennies());
     }
 
     public void displayUserMoneyInput(BigDecimal amount) {
-        io.print("DisplayUserMoneyInput");
+        io.print("User input: " + amount);
+        //io.print("DisplayUserMoneyInput");
     }
 
     public void displayUserChoiceOfProduct(Product product) {
-        io.print("displayUserChoiceOfProduct");
+        io.print("Product Choice is: ");
+        displayProduct(product);
     }
 
     public String promptUserProductChoice() {
@@ -101,8 +63,9 @@ public class VendingMachineView {
     }
 
     public BigDecimal promptUserMoneyInput() {
-        io.print("Please put in money:");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String str = io.readString("Please put in money:");
+        BigDecimal bd = new BigDecimal(str);
+        return bd;
     }
 
     public void displayProductHeader() {
@@ -114,10 +77,11 @@ public class VendingMachineView {
         io.print(" *********************************************");
         io.print("     WELCOME TO THE VENDING MACHINE           ");
         io.print(" *********************************************");
+        io.print("                                              ");
     }
 
     public void displayProduct(Product p) {
-        String productInfo = String.format("%-8s%-15s%s",
+        String productInfo = String.format("%-7s%-17s%s",
                     p.getProductId(),
                     p.getProductName(),
                     p.getPrice());
