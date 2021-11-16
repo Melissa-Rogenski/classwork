@@ -107,7 +107,7 @@ public class Product {
     
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", productName=" + productName + ", price=" + price + ", itemsInStock" + itemsInStock;
+        return "Product{" + "productId=" + productId + ", productName=" + productName + ", price=" + price + ", itemsInStock=" + itemsInStock + '}';
     }
     
     public String marshalProductAsText() {

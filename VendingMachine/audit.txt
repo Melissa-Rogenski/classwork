@@ -13,3 +13,6 @@
 2021-11-16T10:41:29.496974 : Product Id: 1 quantity in stock is zero.
 2021-11-16T10:41:50.512477900 : Product at Id: 2 stock is now at 11
 2021-11-16T10:41:50.525481 : Product list saved to file.
+2021-11-16T12:55:05.398775200 : Product Id: 1 quantity in stock is zero.
+2021-11-16T12:56:01.100877700 : Product at Id: 4 stock is now at 9
+2021-11-16T12:56:01.112879400 : Product list saved to file.
