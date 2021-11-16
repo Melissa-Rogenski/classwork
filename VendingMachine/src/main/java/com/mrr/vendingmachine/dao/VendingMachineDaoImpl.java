@@ -2,7 +2,7 @@
 package com.mrr.vendingmachine.dao;
 
 import com.mrr.vendingmachine.dto.Product;
-import com.mrr.vendingmachine.service.VendingMachineDataValidationException;
+import com.mrr.vendingmachine.service.VendingMachinePersistenceException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,61 +15,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
 public class VendingMachineDaoImpl implements VendingMachineDao {
-
-    public static final String INVENTORY_FILE = "inventory.txt";
-    public static final String DELIMITER = "::";
-
+    
+    public final String PRODUCTS_FILE;
     private Map<String, Product> products = new HashMap<>();
     
-    /*
-    @Override
-    public Product addProduct(String name, Product product) throws VendingMachineDataValidationException {
-        loadProducts();
-        Product prevProduct = products.put(name, product);
-        writeProducts();
-        return prevProduct;
-    }
-
-    */
-    @Override
-    public List<Product> getAllProducts() throws VendingMachineDataValidationException{
-        loadProducts();
-        return new ArrayList(products.values());
-    }
-
-    @Override
-    public Product getProduct(String name) throws VendingMachineDataValidationException {
-        loadProducts();
-        return products.get(name);
+    public VendingMachineDaoImpl() {
+        PRODUCTS_FILE = "products.txt";
     }
     
-    private Product unmarshallProduct(String productAsText) {
-        // name|cost|inventory
-        //  [0] [1]    [3]
-        String[] productTokens = productAsText.split(DELIMITER);
-        
-        String name = productTokens[0];
-        
-        Product productFromFile = new Product(name);
-        
-        productFromFile.setCost(productTokens[1]);
-        
-        productFromFile.setInventory(productTokens[2]);
-        
-        return productFromFile;
+    public VendingMachineDaoImpl(String productsTextFile) {
+        PRODUCTS_FILE = productsTextFile;
     }
     
-    private void loadProducts() throws VendingMachineDataValidationException {
+    @Override
+    public Map<String, Product> loadProductsFromFile() throws VendingMachinePersistenceException {
         Scanner scanner;
         
         try {
-            scanner = new Scanner(new BufferedReader(new FileReader(INVENTORY_FILE)));
-        } catch (FileNotFoundException e) {
-            throw new VendingMachineDataValidationException("-_- Could not load product inventory data into memory.", e);
+            scanner = new Scanner(new BufferedReader(new FileReader(PRODUCTS_FILE)));
+        } catch(FileNotFoundException e) {
+            throw new VendingMachinePersistenceException (
+                    "-_- Could not load product data into memory", e);
         }
-        
         String currentLine;
         
         Product currentProduct;
@@ -78,39 +46,31 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             
             currentLine = scanner.nextLine();
             
-            currentProduct = unmarshallProduct(currentLine);
+            currentProduct = new Product(currentLine);
             
-            products.put(currentProduct.getName(), currentProduct);
+            products.put(currentProduct.getProductId(), currentProduct);
         }
         
         scanner.close();
+        return products;
     }
     
-    private String marshallProduct(Product aProduct) {
-        //name::cost::inventory
-        String productAsText = aProduct.getName() + DELIMITER;
-        
-        productAsText += aProduct.getCost() + DELIMITER;
-        
-        productAsText += aProduct.getInventory();
-        
-        return productAsText;
-    }
-    
-    private void writeProducts() throws VendingMachineDataValidationException {
+    @Override
+    public void writeProductsToFile() throws VendingMachinePersistenceException {
         PrintWriter out;
         
         try {
-            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+            out = new PrintWriter(new FileWriter(PRODUCTS_FILE));
         } catch (IOException e) {
-            throw new VendingMachineDataValidationException("Could not save product data.", e);
+            throw new VendingMachinePersistenceException(
+                    "Could not save product data.", e);
         }
         
         String productAsText;
         List<Product> productList = this.getAllProducts();
         for(Product currentProduct : productList) {
             
-            productAsText = marshallProduct(currentProduct);
+            productAsText = currentProduct.marshalProductAsText();
             
             out.println(productAsText);
             
@@ -118,5 +78,38 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         }
         
         out.close();
-    }  
+    }
+    
+    @Override
+    public Product addProduct(String productId, Product product) {
+        Product prevProduct = products.put(productId, product);
+        return prevProduct;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return new ArrayList<Product>(products.values());
+    }
+
+    @Override
+    public List<String> getAllProductIds() {
+        return new ArrayList<>(products.keySet());
+    }
+
+    @Override
+    public Product getProduct(String productId) {
+        return products.get(productId);
+    }
+
+    @Override
+    public Product updateProduct(String productId, Product product) {
+        return products.replace(productId, product);
+    }
+
+    @Override
+    public Product removeProduct(String productId) {
+        Product removedProduct = products.remove(productId);
+        return removedProduct;
+    }
+    
 }

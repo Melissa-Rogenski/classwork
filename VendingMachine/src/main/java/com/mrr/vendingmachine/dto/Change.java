@@ -1,17 +1,37 @@
 
 package com.mrr.vendingmachine.dto;
 
+import java.math.BigDecimal;
 
 public class Change {
-    public int numQuarters;
-    public int numDimes;
-    public int numNickels;
-    public int numPennies;
     
-    public Change(int... enteredCoins) {
-        this.numPennies = enteredCoins[0];
-        this.numNickels = enteredCoins[1];
-        this.numDimes = enteredCoins[2];
-        this.numQuarters = enteredCoins[3];
+    private int quarters;
+    private int dimes;
+    private int nickels;
+    private int pennies;
+    
+    public Change(BigDecimal amount) {
+        this.quarters = amount.divide(new BigDecimal("25")).intValue();
+        amount = amount.remainder(new BigDecimal("25"));
+        this.dimes = amount.divide(new BigDecimal("10")).intValue();
+        amount = amount.remainder(new BigDecimal("10"));
+        this.nickels = amount.divide(new BigDecimal("5")).intValue();
+        this.pennies = amount.remainder(new BigDecimal("5")).intValue();
+    }
+    
+    public int getQuarters() {
+        return quarters;
+    }
+    
+    public int getDimes() {
+        return dimes;
+    }
+    
+    public int getNickels() {
+        return nickels;
+    }
+    
+    public int getPennies() {
+        return pennies;
     }
 }

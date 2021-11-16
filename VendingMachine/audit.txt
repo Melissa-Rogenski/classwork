@@ -1,0 +1,4 @@
+2021-11-15T22:51:47.729722100 : Product Id: 4 quantity in stock is zero.
+2021-11-15T22:57:00.649436300 : Product Id: 4 quantity in stock is zero.
+2021-11-15T23:03:29.661828100 : Product Id: 4 quantity in stock is zero.
+2021-11-15T23:03:57.681465300 : Product Id: 4 quantity in stock is zero.

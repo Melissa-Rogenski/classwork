@@ -6,69 +6,133 @@
 package com.mrr.vendingmachine.controller;
 
 import com.mrr.vendingmachine.dao.VendingMachineDao;
+import com.mrr.vendingmachine.dto.Change;
+import com.mrr.vendingmachine.dto.CoinValue;
 import com.mrr.vendingmachine.dto.Product;
 import com.mrr.vendingmachine.service.VendingMachineDataValidationException;
+import com.mrr.vendingmachine.service.VendingMachineInsufficientFundsException;
+import com.mrr.vendingmachine.service.VendingMachineNoItemInventoryException;
+import com.mrr.vendingmachine.service.VendingMachinePersistenceException;
+import com.mrr.vendingmachine.service.VendingMachineServiceLayer;
 import com.mrr.vendingmachine.ui.UserIO;
 import com.mrr.vendingmachine.ui.UserIOConsoleImpl;
 import com.mrr.vendingmachine.ui.VendingMachineView;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class VendingMachineController {
     
     private VendingMachineView view;
-    private UserIO io = new UserIOConsoleImpl();
-    private VendingMachineDao dao;
+    private VendingMachineServiceLayer service;
     
-    public VendingMachineController(VendingMachineDao dao, VendingMachineView view) {
-        this.dao = dao;
+    public VendingMachineController(VendingMachineView view, VendingMachineServiceLayer service) {
         this.view = view;
+        this.service = service;
     }
     
     public void run() {
-        boolean keepGoing = true;
-        int menuSelection = 0;
+        BigDecimal moneyDeposited = new BigDecimal("0");
+        Product chosenProduct = null;
+        boolean isEnoughMoney = false;
         try {
-            while (keepGoing) {
-                listProducts();
-                menuSelection = getMenuSelection();
-
-                switch (menuSelection) {
-                    case 1:
-                        io.print("COKE SELECTED");
-                        break;
-                    case 2:
-                        io.print("SPRITE SELECTED");
-                        break;
-                    case 3:
-                        keepGoing = false;
-                        break;
-                    default:
-                        unknownCommand();
+            displayHeader();
+            do {
+                productMenu();
+                moneyDeposited = userMoneyInput(moneyDeposited);
+                chosenProduct = getChosenProduct();
+                isEnoughMoney = didUserPutSufficientAmountOfMoney(moneyDeposited, chosenProduct);
+                if(toExitVendingMachine(isEnoughMoney)) {
+                    return;
                 }
-
-            }
-            exitMessage();
-        } catch (VendingMachineDataValidationException e) {
+            } while(!isEnoughMoney);
+            
+            displayUserMoneyInput(moneyDeposited);
+            displayChangeReturnedToUser(moneyDeposited, chosenProduct);
+            updateSoldProduct(chosenProduct);
+            saveProductList();
+        } catch(VendingMachinePersistenceException e) {
             view.displayErrorMessage(e.getMessage());
-          }
-        
+        } finally {
+            displayFinalMessage();
+        }
     }
     
-    private int getMenuSelection() {
-        return view.printMenuAndGetSelection();
+    void displayHeader() {
+        view.displayVendingMachineWelcome();
     }
     
-    private void listProducts() throws VendingMachineDataValidationException {
-        List<Product> productList = dao.getAllProducts();
-        view.displayProductList(productList);
+    void productMenu() throws VendingMachinePersistenceException {
+        try {
+            view.displayProductHeader();
+            for(Product p : service.loadProductsInStock().values()) {
+                view.displayProduct(p);
+            }
+        } catch(VendingMachineNoItemInventoryException | VendingMachinePersistenceException e) {
+            throw new VendingMachinePersistenceException(e.getMessage());
+        }
     }
     
-    private void unknownCommand() {
-        view.displayUnknownCommandBanner();
+    BigDecimal userMoneyInput(BigDecimal amount) {
+        return amount.add(view.promptUserMoneyInput());
     }
     
-    private void exitMessage() {
-        view.displayExitBanner();
+    Product getChosenProduct() {
+        while(true) {
+            String productId = view.promptUserProductChoice();
+            try {
+                Product product = service.getChosenProduct(productId);
+                view.displayUserChoiceOfProduct(product);
+                return product;
+            } catch(VendingMachineNoItemInventoryException e) {
+                view.displayErrorMessage(e.getMessage());
+            }
+        }
+    }
+    
+    boolean didUserPutSufficientAmountOfMoney(BigDecimal userAmount, Product product) {
+        try {
+            service.checkSufficientMoneyToBuyProduct(userAmount, product);
+            return true;
+        } catch(VendingMachineInsufficientFundsException e) {
+            view.displayErrorMessage(e.getMessage());
+            displayUserMoneyInput(userAmount);
+            return false;
+        }
+    }
+    
+    void displayUserMoneyInput(BigDecimal amount) {
+        view.displayUserMoneyInput(amount);
+    }
+    
+    void displayChangeReturnedToUser(BigDecimal amount, Product product) {
+        Change change = service.calculateChange(amount, product);
+        view.displayChangeDue(change);
+    }
+
+    boolean toExitVendingMachine(boolean isEnoughMoney) {
+        if(isEnoughMoney) {
+            return false;
+        } else {
+            return view.toExit();
+        }
+    }
+    
+    void updateSoldProduct(Product product) throws VendingMachinePersistenceException {
+        try {
+            service.updateProductSale(product);
+        } catch(VendingMachineNoItemInventoryException e) {
+            throw new VendingMachinePersistenceException(e.getMessage());
+        }
+    }
+    
+    void saveProductList() throws VendingMachinePersistenceException {
+        service.saveProductList();
+    }
+    
+    void displayFinalMessage() {
+        view.displayFinalMessage();
     }
     
 }
