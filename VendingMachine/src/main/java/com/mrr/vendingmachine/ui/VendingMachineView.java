@@ -7,6 +7,8 @@ package com.mrr.vendingmachine.ui;
 import com.mrr.vendingmachine.dto.Change;
 import com.mrr.vendingmachine.dto.Product;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // defining what a VendingMachineView is
 public class VendingMachineView {
@@ -84,16 +86,22 @@ public class VendingMachineView {
         io.print("     WELCOME TO THE VENDING MACHINE           ");
         io.print(" *********************************************");
         io.print("                                              ");
-    }
-
+    }  
+    
     // public function that displays the given product
-    public void displayProduct(Product p) {
-        String productInfo = String.format("%-7s%-17s%s",
+    public void displayProducts(List<Product> products) {
+        // lambda to filter out the products that are out of stock
+        products = products.stream()
+                .filter((p) -> p.getItemsInStock() >= 1).collect(Collectors.toList());
+        
+        for(Product p : products) {
+            String productInfo = String.format("%-7s%-17s%s",
                     p.getProductId(),
                     p.getProductName(),
                     p.getPrice());
             // passing string to function to print out the info
             io.print(productInfo);
+        } 
     }
     
 }

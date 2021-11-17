@@ -69,7 +69,7 @@ public interface VendingMachineDao {
     /**
      * Returns the map object associated with the file it is reading from
      *
-     * @returns the map of the products from the file
+     * @returns Map the map of the products from the file
      * @throws VendingMachinePersistenceException
      */
     Map<String, Product> loadProductsFromFile() throws VendingMachinePersistenceException;

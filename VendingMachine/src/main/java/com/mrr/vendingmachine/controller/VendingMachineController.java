@@ -13,6 +13,9 @@ import com.mrr.vendingmachine.service.VendingMachinePersistenceException;
 import com.mrr.vendingmachine.service.VendingMachineServiceLayer;
 import com.mrr.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class VendingMachineController {
@@ -90,11 +93,8 @@ public class VendingMachineController {
         try {
             // call to display product header
             view.displayProductHeader();
-            // foreach loop
-            for(Product p : service.loadProductsInStock().values()) {
-                // call to display product function
-                view.displayProduct(p);
-            }
+            //List<Product> myList = new ArrayList<Product>(service.loadProductsInStock().values());
+            view.displayProducts(new ArrayList<Product>(service.loadProductsInStock().values()));
             //catch block
         } catch(VendingMachineNoItemInventoryException | VendingMachinePersistenceException e) {
             // throw exception

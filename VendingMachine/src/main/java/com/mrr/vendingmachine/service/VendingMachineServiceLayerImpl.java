@@ -34,18 +34,16 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     public Map<String, Product> loadProductsInStock() throws VendingMachinePersistenceException, VendingMachineNoItemInventoryException {
         // creating map
         Map<String, Product> productsInStock = new HashMap<>();
-        // for each to loop through prodcuts
+        // for each to loop through products
         for(Product p : dao.loadProductsFromFile().values()) {
             // if true write audit
-            if(p.getItemsInStock() < 1) {
+            if(p.getItemsInStock() < 1)
                 auditDao.writeAuditEntry("Product Id: " + p.getProductId() + " quantity in stock is zero.");
-            } else {
-                // add product to map
-                productsInStock.put(p.getProductId(), p);
-            }
+            // add product to map
+            productsInStock.put(p.getProductId(), p);
         }
         //return map
-        return productsInStock;
+        return productsInStock;     
     }
     
     // public function to save product list

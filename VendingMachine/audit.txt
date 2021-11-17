@@ -1,2 +1,13 @@
-2021-11-16T18:08:18.723380400 : Product at Id: 4 stock is now at 4
-2021-11-16T18:08:18.741383600 : Product list saved to file.
+2021-11-17T15:04:20.776183800 : Product at Id: 4 stock is now at 4
+2021-11-17T15:04:20.796688 : Product list saved to file.
+2021-11-17T15:05:11.553784 : Product at Id: 4 stock is now at 3
+2021-11-17T15:05:11.573288300 : Product list saved to file.
+2021-11-17T15:05:25.776200700 : Product at Id: 4 stock is now at 2
+2021-11-17T15:05:25.796704200 : Product list saved to file.
+2021-11-17T15:05:37.944258700 : Product at Id: 4 stock is now at 1
+2021-11-17T15:05:37.966261500 : Product list saved to file.
+2021-11-17T15:06:01.857986100 : Product at Id: 4 stock is now at 0
+2021-11-17T15:06:01.878489100 : Product list saved to file.
+2021-11-17T15:06:16.128790200 : Product Id: 4 quantity in stock is zero.
+2021-11-17T15:06:32.367090300 : Product at Id: 1 stock is now at 9
+2021-11-17T15:06:32.380592700 : Product list saved to file.
