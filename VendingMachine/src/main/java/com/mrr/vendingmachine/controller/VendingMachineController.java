@@ -14,8 +14,6 @@ import com.mrr.vendingmachine.service.VendingMachineServiceLayer;
 import com.mrr.vendingmachine.ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 
 public class VendingMachineController {

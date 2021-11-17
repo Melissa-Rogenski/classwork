@@ -12,16 +12,29 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import java.math.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class VendingMachineServiceLayerImplTest {
     
     private VendingMachineServiceLayer testService;
     
     public VendingMachineServiceLayerImplTest() {
+        // wire the Service Layer with stub implementations of the Dao and
+        // Audit Dao
+        ///*
         VendingMachineDao dao = new VendingMachineDaoStubImpl();
         VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
         
         testService = new VendingMachineServiceLayerImpl(dao, auditDao);
+        //*/ 
+        
+        /*
+        ApplicationContext ctx = 
+            new ClassPathXmlApplicationContext("applicationContext.xml");
+        testService = 
+            ctx.getBean("serviceLayer", VendingMachineServiceLayerImpl.class);
+    `   */
     }
     
     @BeforeAll

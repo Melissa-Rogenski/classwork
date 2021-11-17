@@ -5,20 +5,13 @@
 package com.mrr.vendingmachine;
 
 import com.mrr.vendingmachine.controller.VendingMachineController;
-import com.mrr.vendingmachine.dao.VendingMachineAuditDao;
-import com.mrr.vendingmachine.dao.VendingMachineAuditDaoImpl;
-import com.mrr.vendingmachine.dao.VendingMachineDao;
-import com.mrr.vendingmachine.dao.VendingMachineDaoImpl;
-import com.mrr.vendingmachine.service.VendingMachineServiceLayer;
-import com.mrr.vendingmachine.service.VendingMachineServiceLayerImpl;
-import com.mrr.vendingmachine.ui.UserIO;
-import com.mrr.vendingmachine.ui.UserIOConsoleImpl;
-import com.mrr.vendingmachine.ui.VendingMachineView;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
     
     public static void main(String[] args) {
-        // creating a UserIO variable that calls the UserIOConsole constructor
+        /*// creating a UserIO variable that calls the UserIOConsole constructor
         UserIO myIo = new UserIOConsoleImpl();
         // creating a VendingMachineView variable that calls the VendingMachineView constructor
         VendingMachineView myView = new VendingMachineView(myIo);
@@ -31,6 +24,12 @@ public class App {
         // creating a VendingMachineController variable that calls the VendingMachineController constructor
         VendingMachineController myController = new VendingMachineController(myView, myService);
         // calling the run function of controller
-        myController.run();
+        myController.run();*/
+    
+        ApplicationContext ctx = 
+           new ClassPathXmlApplicationContext("applicationContext.xml");
+        VendingMachineController controller = 
+           ctx.getBean("controller", VendingMachineController.class);
+        controller.run();
     }
 }
