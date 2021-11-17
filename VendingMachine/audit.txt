@@ -1,0 +1,2 @@
+2021-11-16T18:08:18.723380400 : Product at Id: 4 stock is now at 4
+2021-11-16T18:08:18.741383600 : Product list saved to file.
