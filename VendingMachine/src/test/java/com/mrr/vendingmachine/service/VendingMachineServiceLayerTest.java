@@ -4,37 +4,43 @@
  */
 package com.mrr.vendingmachine.service;
 
-import com.mrr.vendingmachine.dao.VendingMachineAuditDao;
-import com.mrr.vendingmachine.dao.VendingMachineDao;
 import com.mrr.vendingmachine.dto.Change;
 import com.mrr.vendingmachine.dto.Product;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
 import java.util.*;
 import java.math.*;
+
+import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class VendingMachineServiceLayerImplTest {
+
+public class VendingMachineServiceLayerTest {
     
     private VendingMachineServiceLayer testService;
     
-    public VendingMachineServiceLayerImplTest() {
+    public VendingMachineServiceLayerTest() {
         // wire the Service Layer with stub implementations of the Dao and
         // Audit Dao
-        ///*
+        /*
         VendingMachineDao dao = new VendingMachineDaoStubImpl();
         VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
         
         testService = new VendingMachineServiceLayerImpl(dao, auditDao);
-        //*/ 
+        */ 
         
-        /*
+        
         ApplicationContext ctx = 
             new ClassPathXmlApplicationContext("applicationContext.xml");
         testService = 
-            ctx.getBean("serviceLayer", VendingMachineServiceLayerImpl.class);
-    `   */
+            ctx.getBean("serviceLayer", VendingMachineServiceLayer.class);   
     }
     
     @BeforeAll
