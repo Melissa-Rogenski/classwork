@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean definitions go here -->
+    <bean id="userIO" class="com.mrr.flooringmastery.view.UserIOConsoleImpl"/>
+    
+    <bean id="view" class="com.mrr.flooringmastery.view.FlooringMasteryView">
+        <constructor-arg ref="userIO"/>
+    </bean>
+    
+    <bean id="flooringMasteryDao" 
+         class="com.mrr.flooringmastery.dao.FlooringMasteryDaoImpl"/>
+    
+    <bean id="auditDao" 
+         class="com.mrr.flooringmastery.dao.FlooringMasteryAuditDaoImpl"/>
+    
+    <bean id="serviceLayer" 
+         class="com.mrr.flooringmastery.service.FlooringMasteryServiceLayerImpl">
+        <constructor-arg ref="flooringMasteryDao"/>
+        <constructor-arg ref="auditDao"/>           
+    </bean>
+    
+    <bean id="controller" 
+         class="com.mrr.flooringmastery.controller.FlooringMasteryController">
+        <constructor-arg ref="view"/>
+        <constructor-arg ref="serviceLayer"/>
+    </bean>
+    
+</beans>
