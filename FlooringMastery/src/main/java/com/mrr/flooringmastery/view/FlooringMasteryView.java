@@ -37,20 +37,6 @@ public class FlooringMasteryView {
         return io.readInt("Please select from the above choices.", 1, 5);
     }
     
-    // public function that prints a banner to the console
-    public void displayCreateOrderBanner() {
-        io.print("=== Create Order ===");
-    }
-    
-    // public function that prints a banner to the console
-    public void displayCreateSuccessBanner() {
-        io.readString("Order successfully created.  Please hit enter to continue.");
-    }
-    
-    public void displayDisplayOrdersBanner() {
-        io.print("=== Display Orders ===");
-    }
-    
     public void displayOrders(List<Order> orderList) {
         io.print("Order Number |  Customer Name  |  State  | Product Type |  Area  |"
                 + " Tax Rate | Cost Per Square Foot | Labor Cost Per Square Foot"
@@ -172,11 +158,6 @@ public class FlooringMasteryView {
         io.print("=== ERROR ===");
         io.print(errorMsg);
         displayContinue();
-    }
-    
-    // public function that returns true
-    public boolean toExit() {
-        return true;
     }
 
     public int getOrderNumberInput() {

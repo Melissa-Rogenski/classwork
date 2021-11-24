@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean definitions go here -->
+    <bean id="flooringMasteryDao" 
+       class="com.mrr.flooringmastery.dao.FlooringMasteryDaoImpl"/>
+   
+    <bean id="flooringMasteryDaoStub" 
+       class="com.mrr.flooringmastery.dao.FlooringMasteryDaoStubImpl"/>
+   
+    <bean id="auditDaoStub" 
+       class="com.mrr.flooringmastery.dao.FlooringMasteryAuditDaoStubImpl"/>
+   
+    <bean id="serviceLayer" 
+       class="com.mrr.flooringmastery.service.FlooringMasteryServiceLayerImpl">
+        <constructor-arg ref="flooringMasteryDaoStub"/>
+        <constructor-arg ref="auditDaoStub"/>           
+    </bean>
+    
+</beans>

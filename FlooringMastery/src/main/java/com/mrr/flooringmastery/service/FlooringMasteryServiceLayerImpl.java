@@ -35,11 +35,11 @@ public class FlooringMasteryServiceLayerImpl implements
     // function to calculate tax information
     private void calculateTax(Order order) throws 
             DataPersistenceException,
-            OrderValidationException {
+            TaxValidationException {
         //get tax info from order
         Tax chosenTax = dao.getTax(order.getState());
         if(chosenTax == null) {
-            throw new OrderValidationException("ERROR: TSG Corp "
+            throw new TaxValidationException("ERROR: TSG Corp "
                     + "does not serve that state.");
         }
         order.setState(chosenTax.getStateAbbreviation());
@@ -49,11 +49,11 @@ public class FlooringMasteryServiceLayerImpl implements
     // function to calculate material information
     private void calculateMaterial(Order order) throws 
             DataPersistenceException,
-            OrderValidationException {
+            ProductValidationException {
         //Set product information in order.
         Product chosenProduct = dao.getProduct(order.getProductType());
         if(chosenProduct == null) {
-            throw new OrderValidationException("ERROR: TSG Corp "
+            throw new ProductValidationException("ERROR: TSG Corp "
                     + "does not sell that product.");
         }
         order.setProductType(chosenProduct.getProductType());
@@ -119,7 +119,9 @@ public class FlooringMasteryServiceLayerImpl implements
     @Override
     public Order calculateOrder(Order order) throws 
             DataPersistenceException, 
-            OrderValidationException {
+            OrderValidationException,
+            TaxValidationException,
+            ProductValidationException {
         
         validateOrder(order);
         calculateTax(order);
@@ -159,7 +161,8 @@ public class FlooringMasteryServiceLayerImpl implements
     @Override
     public Order compareOrders(Order savedOrder, Order editedOrder) throws 
             DataPersistenceException, 
-            OrderValidationException {
+            TaxValidationException,
+            ProductValidationException{
         if(editedOrder.getCustomerName() == null || 
                 editedOrder.getCustomerName().trim().equals("")) {
         }else {

@@ -10,6 +10,8 @@ import com.mrr.flooringmastery.service.OrderValidationException;
 import com.mrr.flooringmastery.service.InvalidOrderNumberException;
 import com.mrr.flooringmastery.dao.DataPersistenceException;
 import com.mrr.flooringmastery.service.FlooringMasteryServiceLayer;
+import com.mrr.flooringmastery.service.ProductValidationException;
+import com.mrr.flooringmastery.service.TaxValidationException;
 import com.mrr.flooringmastery.view.FlooringMasteryView;
 import java.time.LocalDate;
 
@@ -120,7 +122,7 @@ public class FlooringMasteryController {
             } else {
                 unknownCommand();
             }
-        } catch (OrderValidationException e) {
+        } catch (OrderValidationException | TaxValidationException | ProductValidationException e) {
             view.displayErrorMessage(e.getMessage());
         }
     }
@@ -144,7 +146,7 @@ public class FlooringMasteryController {
             } else {
                 unknownCommand();
             }
-        } catch (InvalidOrderNumberException e) {
+        } catch (InvalidOrderNumberException | ProductValidationException | TaxValidationException e) {
             view.displayErrorMessage(e.getMessage());
         }
     }

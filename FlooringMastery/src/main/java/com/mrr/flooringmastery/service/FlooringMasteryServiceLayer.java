@@ -36,10 +36,14 @@ public interface FlooringMasteryServiceLayer {
      * @return Order once calculations are done
      * @throws DataPersistenceException
      * @throws OrderValidationException
+     * @throws com.mrr.flooringmastery.service.TaxValidationException
+     * @throws com.mrr.flooringmastery.service.ProductValidationException
      */
     Order calculateOrder(Order order) throws 
             DataPersistenceException, 
-            OrderValidationException;
+            OrderValidationException,
+            TaxValidationException,
+            ProductValidationException;
 
     /**
      * gets a order given the date time and order number
@@ -70,11 +74,13 @@ public interface FlooringMasteryServiceLayer {
      * @param editedOrder the edited order or order b
      * @return the newly saved order
      * @throws DataPersistenceException
-     * @throws OrderValidationException
+     * @throws com.mrr.flooringmastery.service.TaxValidationException
+     * @throws com.mrr.flooringmastery.service.ProductValidationException
      */
     Order compareOrders(Order savedOrder, Order editedOrder)
             throws DataPersistenceException,
-            OrderValidationException;
+            TaxValidationException,
+            ProductValidationException;
 
     /**
      * edits input order

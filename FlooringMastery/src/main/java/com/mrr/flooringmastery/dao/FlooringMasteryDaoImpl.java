@@ -368,12 +368,12 @@ public class FlooringMasteryDaoImpl implements FlooringMasteryDao {
             // getting index of order
             int index = orders.indexOf(chosenOrder);
             // setting order
-            Order set = orders.set(index, editedOrder);
+            orders.set(index, editedOrder);
             // call to writeorders
             writeOrders(orders, editedOrder.getDate());
             //return the edited order
             return editedOrder;
-        }else { // otherwise return null
+        } else { // otherwise return null
             return null;
         }
     }
