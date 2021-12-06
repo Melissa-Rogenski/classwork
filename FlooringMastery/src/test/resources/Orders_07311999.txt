@@ -49,3 +49,12 @@ OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborC
 224,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
 227,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
 236,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+241,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+246,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+250,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+252,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+260,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+262,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+268,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+272,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+277,Infinity Solutions,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10

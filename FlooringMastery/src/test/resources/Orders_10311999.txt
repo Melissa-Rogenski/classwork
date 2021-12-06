@@ -43,3 +43,12 @@ OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborC
 225,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
 228,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
 232,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+239,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+243,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+251,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+253,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+261,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+264,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+269,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+274,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+278,Big Failure,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10

@@ -46,3 +46,12 @@ OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborC
 222,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
 229,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
 233,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+237,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+244,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+247,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+255,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+258,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+265,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+270,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+275,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
+280,Random Company,IN,6.00,Laminate,100,1.75,2.10,175.00,210.00,23.10,408.10
