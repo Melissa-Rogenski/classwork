@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.sg.guessthenumber.service;
+package com.mrr.guessthenumber.service;
 
-import com.sg.guessthenumber.TestApplicationConfiguration;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.mrr.guessthenumber.TestApplicationConfiguration;
+import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
- * @author EricR
+ * @author mroge
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestApplicationConfiguration.class)
@@ -30,7 +21,8 @@ public class ServiceLayerTest {
 
     public ServiceLayerTest() {
     }
-
+    
+    // test 1 for the determine results function
     @Test
     public void testDetermineResult1() {
         String guess = "1234";
@@ -40,6 +32,7 @@ public class ServiceLayerTest {
         assertEquals("e:0:p:2", result);
     }
 
+    // test 2 for the determine results function
     @Test
     public void testDetermineResult2() {
         String guess = "1234";
@@ -49,6 +42,7 @@ public class ServiceLayerTest {
         assertEquals("e:4:p:0", result);
     }
 
+    // test 3 for the determine results function
     @Test
     public void testDetermineResult3() {
         String guess = "1234";
@@ -58,6 +52,7 @@ public class ServiceLayerTest {
         assertEquals("e:0:p:4", result);
     }
 
+    // test 4 for the determine results function
     @Test
     public void testDetermineResult4() {
         String guess = "1234";
@@ -67,6 +62,7 @@ public class ServiceLayerTest {
         assertEquals("e:2:p:2", result);
     }
 
+    // test 5 for the determine results function
     @Test
     public void testDetermineResult5() {
         String guess = "1234";

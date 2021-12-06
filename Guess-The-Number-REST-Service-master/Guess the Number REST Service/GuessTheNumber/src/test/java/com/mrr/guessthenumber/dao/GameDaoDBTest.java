@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.sg.guessthenumber.dao;
+package com.mrr.guessthenumber.dao;
 
-import com.sg.guessthenumber.TestApplicationConfiguration;
-import com.sg.guessthenumber.entity.Game;
+import com.mrr.guessthenumber.TestApplicationConfiguration;
+import com.mrr.guessthenumber.entity.Game;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
- * @author EricR
+ * @author mroge
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestApplicationConfiguration.class)
@@ -33,6 +26,7 @@ public class GameDaoDBTest {
     public GameDaoDBTest() {
     }
 
+    // test for the get all games method
     @Test
     public void testGetAllGames() {
         Game game = new Game();
@@ -52,6 +46,7 @@ public class GameDaoDBTest {
         assertTrue(games.contains(game2));
     }
 
+    // test for the add and get game methods
     @Test
     public void testAddGetGame() {
         Game game = new Game();
@@ -64,6 +59,7 @@ public class GameDaoDBTest {
         assertEquals(game, fromDao);
     }
 
+    // test for the update game method
     @Test
     public void testUpdateGame() {
         Game game = new Game();

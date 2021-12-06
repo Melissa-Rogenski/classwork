@@ -1,23 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: mroge
+ * Purpose: service layer of the application
  */
-package com.sg.guessthenumber.service;
 
-import com.sg.guessthenumber.dao.GameDao;
-import com.sg.guessthenumber.dao.RoundDao;
-import com.sg.guessthenumber.entity.Game;
-import com.sg.guessthenumber.entity.Round;
+package com.mrr.guessthenumber.service;
+
+import com.mrr.guessthenumber.dao.GameDao;
+import com.mrr.guessthenumber.dao.RoundDao;
+import com.mrr.guessthenumber.entity.Game;
+import com.mrr.guessthenumber.entity.Round;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author riddl
- */
+// declaring class
 @Service
 public class ServiceLayer {
 
@@ -27,9 +24,11 @@ public class ServiceLayer {
     @Autowired
     RoundDao roundDao;
 
+    // getting all games and returning them as a list of game type
     public List<Game> getAllGames() {
         List<Game> games = gameDao.getAllGames();
         for (Game game : games) {
+            // filltering output as to not give away answer
             if (!game.isFinished()) {
                 game.setAnswer("****");
             }
@@ -38,13 +37,16 @@ public class ServiceLayer {
         return games;
     }
 
+    // getting all rounds for a given game by game id and returning them as a list of round type
     public List<Round> getAllRoundsByGameId(int gameId) {
         return roundDao.getAllRoundsByGameId(gameId);
     }
 
+    // function to implement the making of a guess by the user
     public Round makeGuess(Round round) {
         String answer = gameDao.getGameById(round.getGameId()).getAnswer();
         String guess = round.getGuess();
+        // call to determine the results of the guess given the guess and the correct answer
         String result = determineResult(guess, answer);
         round.setResult(result);
         
@@ -57,6 +59,7 @@ public class ServiceLayer {
         return roundDao.addRound(round);
     }
 
+    // function to call the get game by id function from the gamedao
     public Game getGameById(int gameId) {
         Game game = gameDao.getGameById(gameId);
         if (!game.isFinished()) {
@@ -66,10 +69,12 @@ public class ServiceLayer {
         return game;
     }
 
+    // function to add a game to the database
     public Game addGame(Game game) {
         return gameDao.addGame(game);
     }
 
+    // function to create a new game and add it to the databse using the addGame function above
     public int newGame() {
         Game game = new Game();
         game.setAnswer(generateAnswer());
@@ -78,6 +83,7 @@ public class ServiceLayer {
         return game.getGameId();
     }
 
+    // function to randomly generate a answer for a new game
     private String generateAnswer() {
         Random rnd = new Random();
         int digit1 = rnd.nextInt(10);
@@ -103,6 +109,7 @@ public class ServiceLayer {
         return answer;
     }
 
+    // function to determine how close the guess is to the result
     public String determineResult(String guess, String answer) {
         char[] guessChars = guess.toCharArray();
         char[] answerChars = answer.toCharArray();

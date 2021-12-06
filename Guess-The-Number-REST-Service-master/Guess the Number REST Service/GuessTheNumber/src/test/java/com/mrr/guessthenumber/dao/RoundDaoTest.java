@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.sg.guessthenumber.dao;
+package com.mrr.guessthenumber.dao;
 
-import com.sg.guessthenumber.TestApplicationConfiguration;
-import com.sg.guessthenumber.entity.Game;
-import com.sg.guessthenumber.entity.Round;
-import com.sg.guessthenumber.entity.Round;
+import com.mrr.guessthenumber.TestApplicationConfiguration;
+import com.mrr.guessthenumber.entity.Game;
+import com.mrr.guessthenumber.entity.Round;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,9 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
- * @author EricR
+ * @author mroge
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestApplicationConfiguration.class)
 public class RoundDaoTest {
@@ -39,6 +29,7 @@ public class RoundDaoTest {
     public RoundDaoTest() {
     }
     
+    // test for the add and get all methods
     @Test
     public void testAddGetGetAll() {
         int gameId = 1;

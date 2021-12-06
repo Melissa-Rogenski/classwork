@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: mroge
+ * Purpose: This file implements the RoundDao interface
  */
-package com.sg.guessthenumber.dao;
+package com.mrr.guessthenumber.dao;
 
-import com.sg.guessthenumber.entity.Game;
-import com.sg.guessthenumber.entity.Round;
+import com.mrr.guessthenumber.entity.Round;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -18,16 +16,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author riddl
- */
+//declaring class with implements keyword
 @Repository
 public class RoundDaoDB implements RoundDao {
 
     @Autowired
     JdbcTemplate jdbc;
     
+    // implementing getAllRoundsByGameId method
     @Override
     public List<Round> getAllRoundsByGameId(int gameId) {
         try {
@@ -40,6 +36,7 @@ public class RoundDaoDB implements RoundDao {
         }
     }
 
+    // implementing getRoundById method
     @Override
     public Round getRoundById(int roundId) {
         try {
@@ -50,6 +47,7 @@ public class RoundDaoDB implements RoundDao {
         }    
     }
 
+    // implementing addRound method
     @Override
     @Transactional
     public Round addRound(Round round) {
@@ -61,7 +59,7 @@ public class RoundDaoDB implements RoundDao {
         return getRoundById(newRoundId);
     }
     
-    
+    // Mapper class that is specific to RoundDao
     public static final class RoundMapper implements RowMapper<Round> {
         
         @Override

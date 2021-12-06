@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: mroge
+ * Purpose: This file implements the GameDao interface
  */
-package com.sg.guessthenumber.dao;
+package com.mrr.guessthenumber.dao;
 
-import com.sg.guessthenumber.entity.Game;
+import com.mrr.guessthenumber.entity.Game;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,22 +15,21 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author riddl
- */
+//declaring class with implements keyword
 @Repository
 public class GameDaoDB implements GameDao {
 
     @Autowired
     JdbcTemplate jdbc;
     
+    // implementing getAllGames method
     @Override
     public List<Game> getAllGames() {
         final String SELECT_ALL_GAMES = "SELECT * FROM game";
         return jdbc.query(SELECT_ALL_GAMES, new GameMapper());
     }
 
+    // implementing getGameById method
     @Override
     public Game getGameById(int gameId) {
         try {
@@ -42,6 +40,7 @@ public class GameDaoDB implements GameDao {
         }
     }
 
+    // implementing addGame method
     @Override
     @Transactional
     public Game addGame(Game game) {
@@ -53,12 +52,14 @@ public class GameDaoDB implements GameDao {
         return game;
     }
     
+    // implementing updateGame method
     @Override
     public void updateGame(Game game) {
         final String UPDATE_GAME = "UPDATE game SET finished = ? WHERE game_id = ?";
         jdbc.update(UPDATE_GAME, game.isFinished(), game.getGameId());
     }
     
+    // Mapper class that is specific to GameDao
     public static final class GameMapper implements RowMapper<Game> {
         
         @Override

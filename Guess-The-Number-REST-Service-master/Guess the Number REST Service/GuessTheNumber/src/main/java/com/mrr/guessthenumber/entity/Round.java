@@ -1,17 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: mroge
+ * Purpose: The DTO that holds all the Round info
  */
-package com.sg.guessthenumber.entity;
+package com.mrr.guessthenumber.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-/**
- *
- * @author riddl
- */
+// defining what is in a Round object
 public class Round {
     private int roundId;
     private int gameId;
@@ -19,15 +15,30 @@ public class Round {
     private String guess;
     private String result;
 
+    /**
+     * default constructor
+     */
     public Round() {
     }
 
+    /**
+     * constructor
+     * @param gameId
+     * @param guess
+     */
     public Round(int gameId, String guess) {
         this.gameId = gameId;
         this.guess = guess;
     }
     
-
+    /**
+     * constructor
+     * @param roundId
+     * @param gameId
+     * @param guessTime
+     * @param guess
+     * @param result
+     */
     public Round(int roundId, int gameId, LocalDateTime guessTime, String guess, String result) {
         this.roundId = roundId;
         this.gameId = gameId;
@@ -36,46 +47,87 @@ public class Round {
         this.result = result;
     }
 
+    /**
+     * getter for roundId
+     * @return int
+     */
     public int getRoundId() {
         return roundId;
     }
 
+    /**
+     * setter for roundId
+     * @param roundId
+     */
     public void setRoundId(int roundId) {
         this.roundId = roundId;
     }
 
+    /**
+     * getter for gameId
+     * @return int
+     */
     public int getGameId() {
         return gameId;
     }
 
+    /**
+     * setter for gameId
+     * @param gameId
+     */
     public void setGameId(int gameId) {
         this.gameId = gameId;
     }
 
+    /**
+     * getter for guessTime
+     * @return LocalDateTime
+     */
     public LocalDateTime getGuessTime() {
         return guessTime;
     }
 
+    /**
+     * setter for guessTime
+     * @param guessTime
+     */
     public void setGuessTime(LocalDateTime guessTime) {
         this.guessTime = guessTime;
     }
 
+    /**
+     * getter for guess
+     * @return String
+     */
     public String getGuess() {
         return guess;
     }
 
+    /**
+     * setter for guess
+     * @param guess
+     */
     public void setGuess(String guess) {
         this.guess = guess;
     }
 
+    /**
+     * getter for result
+     * @return String
+     */
     public String getResult() {
         return result;
     }
 
+    /**
+     * setter for result
+     * @param result
+     */
     public void setResult(String result) {
         this.result = result;
     }
 
+    // hash function override
     @Override
     public int hashCode() {
         int hash = 7;
@@ -87,6 +139,7 @@ public class Round {
         return hash;
     }
 
+    // equals function override
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -116,6 +169,4 @@ public class Round {
         }
         return true;
     }
-    
-    
 }
